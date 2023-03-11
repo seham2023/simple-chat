@@ -1,17 +1,12 @@
 <div wire:poll>
     <div class="container">
-        <h3 class=" text-center">
-
-
-        </h3>
+        <h3 class=" text-center"></h3>
         <div class="messaging">
-            <div class="inbox_msg">
+            <div class="inbox_msg" >
                 <div class="mesgs">
                     <div id="chat" class="msg_history">
                         @forelse ($messages as $message)
-
-                            @if ($message->user->name == auth()->user()->name)
-                                <!-- Reciever Message-->
+                                <!-- Sender Message-->
                                 <div class="outgoing_msg">
                                     <div class="sent_msg">
                                         <p>{{ $message->message }}</p>
@@ -19,26 +14,23 @@
                                             {{ $message->created_at->diffForHumans(null, true, false) }}</span>
                                     </div>
                                 </div>
-
-                            @else
-
-                                <div class="incoming_msg">{{ $message->user->name }}
-                                    <div class="incoming_msg_img"> <img
-                                            src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                <!-- Receiver Message-->
+                                <div class="sent_msg" style="margin-right: auto!important">
+                                    <div class="incoming_msg_img">
+                                        <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                                    </div>
                                     <div class="received_msg">
                                         <div class="received_withd_msg">
+                                            <h1>{{$message->receivers->name??''}}</h1>
                                             <p>{{ $message->message }}</p>
-                                            <span
-                                                class="time_date">{{ $message->created_at->diffForHumans(null, false, false) }}</span>
+                                            <span class="time_date">{{ $message->created_at->diffForHumans(null, false, false) }}</span>
                                         </div>
                                     </div>
                                 </div>
-
-                            @endif
+                            {{-- @endif --}}
                         @empty
                             <h5 style="text-align: center;color:red"> لاتوجد رسائل سابقة</h5>
                         @endforelse
-
                     </div>
                     <div class="type_msg">
                         <div class="input_msg_write">
@@ -49,11 +41,10 @@
                             </form>
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
     </div>
+
 </div>
 

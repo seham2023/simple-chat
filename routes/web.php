@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/chat', function () {
-    return view('chat.index');
+Route::get('/chat/{receiver}', function ($receiver) {
+    $user = Auth::user(); // get the authenticated user
+    return view('chat.index')->with('receiver', $receiver)->with('user', $user);
 });
-
 
 Route::get('/', function () {
     return view('welcome');
